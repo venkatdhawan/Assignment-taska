@@ -14,7 +14,7 @@ Error received while starting the redis server
 
 •	Restarted the redis service by below commands
 
- systemctl restart redis-server.service
+               systemctl restart redis-server.service
 
 •	Trouble shooted commands, Config and Log file path
                Journalctl –xe
