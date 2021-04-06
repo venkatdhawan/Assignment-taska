@@ -1,0 +1,26 @@
+  
+•	Issue with  the web application due to IIS service is not started
+
+•	Error received while starting the IIS service
+
+Windows could not start the IIS Admin Service on Local Computer. service-specific error code -2146893818.
+
+•	Troubleshooted the error with reference to below Microsoft site
+
+https://techcommunity.microsoft.com/t5/iis-support-blog/error-2146893818-event-7024-invalid-signature/ba-p/1074715
+
+•	Error occurs when the machine key which is used for decryption/encryption is corrupted,We can see numerous Schannel errors because of this corrupted file
+
+•	Go to MachineKeys folder (C:\ProgramData\Microsoft\Crypto\RSA\MachineKeys)
+
+•	Check the Last Modified Date of the file that has a name starting with c23
+
+•	If the date is newer than the date IIS server is installed, it means something (an update or installation) caused this file to change and get corrupted
+
+•	Remove the machine key starting with c23 (C:\ProgramData\Microsoft\Crypto\RSA\MachineKeys)
+
+•	Uninstall IIS 6 Metabase Compatibility (Server Manager > Manage > Remove Roles and Features) and restarted the server
+
+•	After restarting the server, install IIS 6 Metabase Compatibility (Server Manager > Manage > Add Roles and Features). Make sure that the machine key with c23 name is created
+
+•	Go to Services window. IIS Admin Service should already running.
